@@ -7,7 +7,7 @@ local lspconfig = require "lspconfig"
 local servers = {
   "html",
   "cssls",
-  "tsserver",
+  "ts_ls",
   "svelte",
   "tailwindcss",
   "eslint",
@@ -24,6 +24,14 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
+
+lspconfig.ts_ls.setup {
+  settings = {
+    implicitProjectConfiguration = {
+      checkJs = true,
+    },
+  },
+}
 
 lspconfig.svelte.setup {
   filetypes = { "svelte" },
