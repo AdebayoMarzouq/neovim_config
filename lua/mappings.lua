@@ -369,3 +369,10 @@ wk.add {
     desc = "Toggle Todo",
   },
 }
+
+wk.add {
+  { "<leader>n", group = "Neogen" },
+  { "<leader>nd", desc = "Generate documentation" },
+  { "<leader>nc", desc = "Generate class documentation" },
+  { "<leader>nf", desc = "Generate function documentation" },
+}

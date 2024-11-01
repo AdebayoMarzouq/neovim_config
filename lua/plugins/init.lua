@@ -53,25 +53,57 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
     opts = {
       ensure_installed = {
-        "vim",
-        "lua",
+        --- Documentation parsers
         "vimdoc",
+        "jsdoc",
+        "comment",
+        "regex",
+
+        --- Web Development
         "html",
         "css",
         "svelte",
         "typescript",
         "javascript",
         "tsx",
-        "markdown",
-        "regex",
-        "comment",
-        "sql",
+
+        --- Languages
         "go",
         "rust",
         "python",
         "c",
+
+        --- Database
+        "sql",
+
+        --- Scripting & Automation
+        "vim",
+        "vimdoc",
+        "lua",
+        "query",
+
+        --- Markup & data
+        "json",
+        "yaml",
+        "toml",
+        "xml",
+        "graphql",
+        "markdown",
+        "markdown_inline",
+
+        --- System/Shell
+        "bash",
+        "dockerfile",
+      },
+
+      sync_install = false,
+      auto_install = true,
+
+      highlight = {
+        enable = true,
       },
     },
   },
@@ -83,7 +115,7 @@ return {
       message_template = " <author> • <summary> • <<sha>> • <date>",
       date_format = "%r",
       virtual_text_column = 1,
-      message_when_not_committed = "Oh please, commit this !",
+      message_when_not_committed = "You no commit am nii?",
     },
   },
   {
@@ -141,5 +173,35 @@ return {
     event = "VeryLazy",
     dependencies = "nvim-telescope/telescope.nvim",
     cmd = { "Tdo", "TdoEntry", "TdoNote", "TdoTodos", "TdoToggle", "TdoFind", "TdoFiles" },
+  },
+  {
+    "tjdevries/luai.nvim",
+    cmd = { "LuaiGenerate" },
+    config = function()
+      require("luai").setup {
+        token = "ANTHROPIC_TOKEN",
+      }
+    end,
+    opts = {
+      enabled = true,
+    },
+  },
+  {
+    "danymat/neogen",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+    -- Load when needed instead of at startup
+    cmd = { "Neogen" },
+    -- Configuration
+    config = function()
+      require("custom.neogen").setup()
+    end,
+  },
+  {
+    -- Enhanced TODO comments
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = true,
   },
 }
