@@ -1,5 +1,34 @@
 return {
   {
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+      "theHamsta/nvim-dap-virtual-text",
+      "leoluz/nvim-dap-go",
+      "nvim-neotest/nvim-nio",
+    },
+    config = function()
+      local dap, dapui = require "dap", require "dapui"
+
+      require("dapui").setup()
+      require("dap-go").setup()
+      require("nvim-dap-virtual-text").setup()
+
+      dap.listeners.before.attach.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.launch.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated.dapui_config = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited.dapui_config = function()
+        dapui.close()
+      end
+    end,
+  },
+  {
     "stevearc/conform.nvim",
     event = "BufWritePre", -- uncomment for format on save
     config = function()
@@ -187,21 +216,17 @@ return {
     },
   },
   {
-    "danymat/neogen",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-    },
-    -- Load when needed instead of at startup
-    cmd = { "Neogen" },
-    -- Configuration
-    config = function()
-      require("custom.neogen").setup()
-    end,
-  },
-  {
     -- Enhanced TODO comments
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = true,
+  },
+  {
+    dir = "~/Documents/Development/personal/ME/my_plugins/scratch_buffer/",
+    name = "scratch_buffer",
+    event = "BufEnter",
+    config = function()
+      require "scratch_buffer"
+    end,
   },
 }

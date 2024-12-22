@@ -1,6 +1,7 @@
 require "nvchad.mappings"
 local wk = require "which-key"
 local harpoon = require "harpoon"
+local dap, dapui = require "dap", require "dapui"
 local options = { noremap = true, silent = true }
 local map = vim.keymap.set
 
@@ -370,9 +371,27 @@ wk.add {
   },
 }
 
+-- dap
 wk.add {
-  { "<leader>n", group = "Neogen" },
-  { "<leader>nd", desc = "Generate documentation" },
-  { "<leader>nc", desc = "Generate class documentation" },
-  { "<leader>nf", desc = "Generate function documentation" },
+  { "<leader>p", group = "harpoon" },
+  {
+    "<leader>pt",
+    ":DapUiToggle<CR>",
+    desc = "Open debugger",
+  },
+  {
+    "<leader>pb",
+    dap.toggle_breakpoint,
+    desc = "Toggle debugger breakpoint",
+  },
+  {
+    "<leader>pc",
+    dap.continue,
+    desc = "Continue debugging",
+  },
+  {
+    "<leader>pr",
+    ":lua require('dapui').open({reset = true})<CR>",
+    desc = "Reset debugger",
+  },
 }
