@@ -1,5 +1,49 @@
 return {
   {
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.8",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      defaults = {
+        prompt_prefix = " ",
+        selection_caret = " ",
+        path_display = { "smart" },
+        dynamic_preview_title = true,
+        sorting_strategy = "descending",
+        layout_strategy = "flex",
+        layout_config = {
+          horizontal = {
+            prompt_position = "bottom",
+            size = {
+              width = "90%",
+              height = "90%",
+            },
+          },
+          vertical = {
+            prompt_position = "bottom",
+            size = {
+              width = "90%",
+              height = "90%",
+            },
+          },
+        },
+      },
+      pcall(require("telescope").load_extension, "file_browser"),
+      extensions = {
+        ["ui-select"] = {
+          require("telescope.themes").get_dropdown {},
+        },
+        file_browser = {
+          prompt_title = "פּ  Browser",
+          grouped = true,
+        },
+      },
+    },
+  },
+  {
+    "MunifTanjim/nui.nvim",
+  },
+  {
     "mfussenegger/nvim-dap",
     dependencies = {
       "rcarriga/nvim-dap-ui",
@@ -35,13 +79,13 @@ return {
       require "configs.conform"
     end,
   },
-  {
-    "nvimtools/none-ls.nvim",
-    event = "VeryLazy",
-    opts = function()
-      require "plugins.custom.null-ls"
-    end,
-  },
+  -- {
+  --   "nvimtools/none-ls.nvim",
+  --   event = "VeryLazy",
+  --   opts = function()
+  --     require "plugins.custom.null-ls"
+  --   end,
+  -- },
   -- These are some examples, uncomment them if you want to see them work!
   {
     "neovim/nvim-lspconfig",
@@ -202,18 +246,6 @@ return {
     event = "VeryLazy",
     dependencies = "nvim-telescope/telescope.nvim",
     cmd = { "Tdo", "TdoEntry", "TdoNote", "TdoTodos", "TdoToggle", "TdoFind", "TdoFiles" },
-  },
-  {
-    "tjdevries/luai.nvim",
-    cmd = { "LuaiGenerate" },
-    config = function()
-      require("luai").setup {
-        token = "ANTHROPIC_TOKEN",
-      }
-    end,
-    opts = {
-      enabled = true,
-    },
   },
   {
     -- Enhanced TODO comments

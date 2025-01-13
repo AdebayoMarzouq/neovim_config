@@ -56,6 +56,9 @@ map("v", "<A-k>", ":m '<-2<CR>gv=gv", merge { desc = "Move line down (V)" })
 -- Blackhole delete
 map({ "n", "x", "v", "o" }, "<leader>d", '"_d', merge { desc = "Delete without yanking" })
 
+-- yank to clipboard
+map({ "n", "v" }, "<leader>y", [["+y]], merge { desc = "Yank to system clipboard" })
+
 -- Undotree
 wk.add {
   {
