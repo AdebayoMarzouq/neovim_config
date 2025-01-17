@@ -9,7 +9,7 @@ ls.add_snippets("go", {
     i(1, "err"),
     t " != nil {",
     t { "", "\t" },
-    t 'fmt.Errorf("%v", ',
+    t 'fmt.Errorf("%w", ',
     i(2, "err"),
     t ")",
     t { "", "\treturn" },

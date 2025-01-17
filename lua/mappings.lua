@@ -59,6 +59,11 @@ map({ "n", "x", "v", "o" }, "<leader>d", '"_d', merge { desc = "Delete without y
 -- yank to clipboard
 map({ "n", "v" }, "<leader>y", [["+y]], merge { desc = "Yank to system clipboard" })
 
+-- show diagnostics
+map("n", "E", function()
+  vim.diagnostic.open_float()
+end, merge { desc = "Move line up (N)" })
+
 -- Undotree
 wk.add {
   {
