@@ -4,6 +4,8 @@ require "nvchad.options"
 
 local o = vim.o
 local a = vim.api
+
+--#region
 --
 o.cursorlineopt = "both" -- to enable cursorline!
 --
@@ -18,7 +20,7 @@ opts.clipboard = "unnamedplus"
 -- undo
 vim.o.undofile = true
 
-a.nvim_create_autocmd("BufDelete", {
+a.nvim_create_autocmd({ "VimEnter", "BufDelete" }, {
   callback = function()
     local bufs = vim.t.bufs
     if #bufs == 1 and vim.api.nvim_buf_get_name(bufs[1]) == "" then

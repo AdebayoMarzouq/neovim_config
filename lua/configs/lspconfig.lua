@@ -14,6 +14,10 @@ local servers = {
   "sqlls",
   "gopls",
   "pylsp",
+  "bashls",
+  "prismals",
+  "dockerls",
+  "docker_compose_language_service",
 }
 
 -- lsps with default config
@@ -26,11 +30,24 @@ for _, lsp in ipairs(servers) do
 end
 
 lspconfig.ts_ls.setup {
+  on_attach = function(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = false -- Disable formatting
+    client.server_capabilities.documentRangeFormattingProvider = false
+    on_attach(client, bufnr)
+  end,
   settings = {
     implicitProjectConfiguration = {
       checkJs = true,
     },
   },
+}
+
+lspconfig.eslint.setup {
+  on_attach = function(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = false -- Disable formatting
+    client.server_capabilities.documentRangeFormattingProvider = false
+    on_attach(client, bufnr)
+  end,
 }
 
 lspconfig.svelte.setup {

@@ -11,10 +11,22 @@ local stbufnr = function()
 end
 
 M.ui = {
-  theme = "catppuccin",
+  theme = "rosepine",
   transparency = true,
   statusline = {
-    order = { "mode", "relativepath", "file", "git", "%=", "lsp_msg", "%=", "diagnostics", "lsp", "cwd", "cursor" },
+    order = {
+      "mode",
+      "relativepath",
+      "file",
+      "git",
+      "%=",
+      "lsp_msg",
+      "%=",
+      "diagnostics",
+      "lsp",
+      "cwd",
+      "cursor",
+    },
     modules = {
       relativepath = function()
         local path = vim.api.nvim_buf_get_name(stbufnr())
